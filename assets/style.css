@@ -123,8 +123,19 @@ header {
 }
 /* Code CSS en prévision de l'ajout d'un carousel pour la bannière */
 /* Gestion des fleches du carrousel */
-#banner .arrow {
+#banner .arrows {
 	position: absolute;
+	width:92%;
+	top: 35%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+#banner .arrow{
+	cursor: pointer;
+	width: 42px;
+	height: 67px;
+	opacity: 0.7;
 }
 #banner .arrow_left {
 	left: 10px;
@@ -136,8 +147,10 @@ header {
 .dots {
 	position: absolute;
 	bottom: 40px;
-	display: flex;
+	
 }
+
+
 .dot {
 	margin-inline: 5px;
 	width: 13px;
