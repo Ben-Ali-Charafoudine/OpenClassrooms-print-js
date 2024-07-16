@@ -135,8 +135,9 @@ header {
 	cursor: pointer;
 	width: 42px;
 	height: 67px;
-	opacity: 0.7;
+	
 }
+
 #banner .arrow_left {
 	left: 10px;
 }
@@ -147,7 +148,9 @@ header {
 .dots {
 	position: absolute;
 	bottom: 40px;
-	
+	display: flex;
+	cursor: pointer;
+	font-size: 45px;
 }
 
 
@@ -158,8 +161,10 @@ header {
 	background-color: #ffffff00;
 	border: 3px solid #fff;
 	border-radius: 100%;
-	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+
 }
+
 .dot_selected {
 	background-color: #fff;
 }
