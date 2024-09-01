@@ -14,72 +14,75 @@ const slides = [
     {
         "image": "slide4.png",
         "tagLine": "Autocollants <span>avec découpe laser sur mesure</span>"
-    }
+    },
 ];
 
-document.addEventListener('DOMContentLoaded', (event) => {
-    // Récupération des éléments nécessaires
-    const images = document.querySelectorAll('.banner-img');
-    const tagLine = document.querySelector('#banner p');
-    const arrowLeft = document.getElementById('arrow-left');
-    const arrowRight = document.getElementById('arrow-right');
-    const dotsContainer = document.querySelector('.dots');
+// Récupération des éléments nécessaires
+const images = document.querySelectorAll('.banner-img');
+const tagLine = document.querySelector('#banner p');
 
-    // Variable pour suivre l'index actuel de l'image
-    let currentIndex = 0;
+// Index de l'image en cours
+let i = 0;
+const nbImg = slides.length // ici 4 /!\ attention différent de l'index max qui est égal à 3
 
-    // Mise à jour de l'affichage en fonction de l'index actuel
-    function updateBanner() {
-        images.forEach((img, index) => {
-            img.style.display = index === currentIndex ? 'block' : 'none';
-        });
+/*
+CHANGEMENT DES IMAGES AVEC LES FLÈCHES
+1. Créer la banière en HTML OK
+2. Récupérer les flèches avec querySelector OK
+3. Ajouter les addEventListener sur chaque flèche au CLICK KO
+4. Modifier les images en fonction de la direction dans laquelle il a cliqué KO
+*/
 
-        tagLine.innerHTML = slides[currentIndex].tagLine;
-        updateDots(); 
+// 2. Récupérer les flèches avec querySelector
+const arrowLeft = document.getElementById('arrow-left');
+const arrowRight = document.getElementById('arrow-right');
+
+// écrire le code ici
+function updateBanner () { 
+    images.forEach((img,index )=> {
+        img.style.display=index===i? 'block':'none';
+    }); 
+    tagLine.innerHTML = slides[i].tagLine
+}
+
+// 3. Ajouter les addEventListener sur chaque flèche au CLICK
+arrowLeft.addEventListener('click',() => changImage("left"));
+arrowRight.addEventListener('click', () => changImage("right"));
+updateBanner();
+/*
+MODIFIER LES IMAGES
+1. Si l'utilisateur click
+- flèche droite : +1
+- flèche gauche : -1
+/!\ Si click :
+- flèche droite ET i = 3 ALORS i = 0
+- flèche gauche ET i = 0 ALORS i = 3
+*/ 
+// 4. Modifier les images en fonction de la direction dans laquelle il a cliqué
+// Utilisation de ternaires : condition ? si vrai : si faux;
+/**
+* Exemple de JSDoc
+* @param {('left' | 'right')} direction
+*/
+function changImage(direction){
+    if(direction==='right') {
+        /* ternaire équivalent de :
+        if (i===3) {
+        i = 0
+        } else {
+        i = i+1
+        }*/
+        i = (i===nbImg-1) ? 0 : i+1;
+    } else if(direction==='left') {
+        i = (i===0) ? nbImg-1 : i-1;
     }
+    updateBanner();  
+}
 
-    // Fonction pour mettre à jour les points actifs
-    function updateDots() {
-        const dots = document.querySelectorAll('.dot'); 
-        dots.forEach((dot, index) => {
-            if (index === currentIndex) {
-                dot.classList.add('dot_selected'); 
-            } else {
-                dot.classList.remove('dot_selected'); 
-            }
-        });
-    }
-
-    // Fonction pour changer d'image
-    function changeImage(direction) {
-        if (direction === 'left') {
-            currentIndex = (currentIndex === 0) ? slides.length - 1 : currentIndex - 1;
-        } else if (direction === 'right') {
-            currentIndex = (currentIndex === slides.length - 1) ? 0 : currentIndex + 1;
-        }
-        updateBanner();
-    }
-
-    // Création des points
-    slides.forEach((slide, index) => {
-        const dot = document.createElement('div'); 
-        dot.classList.add('dot'); 
-        if (index === currentIndex) {
-            dot.classList.add('dot_selected'); 
-        }
-        dot.addEventListener('click', () => {
-            currentIndex = index; 
-            updateBanner(); 
-        });
-        dotsContainer.appendChild(dot); 
-    });
-
-    // Ajout des écouteurs d'événements aux flèches
-    arrowLeft.addEventListener('click', () => changeImage('left'));
-    arrowRight.addEventListener('click', () => changeImage('right'));
-
-    // Initialisation de l'affichage
-    updateBanner();
-}); 
-
-
+/*
+Liste des grosses étapes
+1. Ajouter les dots (bulles)
+2. Ajouter un eventListener sur CHAQUE dot au 'click'
+3. Faire en sorte que le dot permette de récupérer la bonne image. Exemple : dot 2 = image 2
+*/
+const dotsContainer = document.querySelector('.dots');
