@@ -156,8 +156,8 @@ header {
 
 .dot {
 	margin-inline: 5px;
-	width: 13px;
-	height: 13px;
+	width: 19px;
+	height: 19px;
 	background-color: #ffffff00;
 	border: 3px solid #fff;
 	border-radius: 100%;
@@ -166,7 +166,8 @@ header {
 }
 
 .dot_selected {
-	background-color: #fff;
+	background-color: #f41010;	
+	
 }
 /* Fin du code CSS pour le carousel */
 #banner p {

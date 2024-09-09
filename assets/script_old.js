@@ -106,4 +106,4 @@ arrowRight.addEventListener('click', () => changeImage('right'));
 
 // Initialisation de l'affichage
 updateBanner();
-}
+
